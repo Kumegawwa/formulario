@@ -79,6 +79,14 @@
             background-color: #c2185b;
         }
 
+        .range-label {
+            margin-bottom: 10px;
+        }
+
+        .range-label span {
+            color: #e91e63;
+        }
+
         @media (max-width: 768px) {
             form {
                 width: 90%;
@@ -93,7 +101,7 @@
 <body>
 
     <form action="#" method="post">
-        <h1>Formulário de Agendamento</h1>
+        <h1>Formulário de Anamnese </h1>
         
         <h2>Informações Pessoais</h2>
 
@@ -167,13 +175,14 @@
 
         <div class="range-label">
             <label for="tamanho-cabelo">Qual o comprimento do seu cabelo atualmente? (em cm)</label>
-            <output id="range-output">50</output> cm
+            <br>
+            <id="range-text">Meu cabelo tem <span id="range-value">50</span> cm</span>
         </div>
         <input type="range" id="tamanho-cabelo" name="tamanho-cabelo" min="0" max="100" step="1" value="50" oninput="updateRange(this.value)">
         
         <script>
             function updateRange(value) {
-                document.getElementById('range-output').innerHTML = value;
+                document.getElementById('range-value').innerText = value;
             }
         </script>
 
