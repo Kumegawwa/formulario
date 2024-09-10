@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário - Salão de Beleza</title>
+    <style>
+        body {
+            background-color: #f8d7e1;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            width: 40%;
+            margin: 50px auto;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #e91e63;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .group {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .group .half-width {
+            width: 48%;
+        }
+
+        .small-input {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="submit"], input[type="reset"] {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #c2185b;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                width: 90%;
+            }
+
+            .group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <form action="#" method="post">
+        <h1>Formulário de Agendamento</h1>
+        
+        <h2>Informações Pessoais</h2>
+
+        <div class="group">
+            <div class="half-width">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" maxlength="50" required>
+            </div>
+            <div class="half-width">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="half-width">
+                <label for="dtnasc">Data de Nascimento</label>
+                <input type="date" id="dtnasc" name="dtnasc" required>
+            </div>
+            <div class="half-width">
+                <label for="fone">Telefone de Contato</label>
+                <input type="tel" id="fone" name="fone" required pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" placeholder="11 99999-9999">
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="half-width">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" maxlength="9" onblur="pesquisacep(this.value);" placeholder="12345-678">
+            </div>
+            <div class="half-width">
+                <label for="rua">Rua</label>
+                <input type="text" id="rua" name="rua" disabled>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="half-width">
+                <label for="num">Número</label>
+                <input type="text" id="num" name="num">
+            </div>
+            <div class="half-width">
+                <label for="bairro">Bairro</label>
+                <input type="text" id="bairro" name="bairro" disabled>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="half-width">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" disabled>
+            </div>
+            <div class="half-width">
+                <label for="uf">Estado</label>
+                <input type="text" id="uf" name="uf" disabled>
+            </div>
+        </div>
+
+        <h2>Serviços</h2>
+
+        <label for="profissional">Profissional desejado</label>
+        <select id="profissional" name="profissional" required>
+            <option value="" disabled selected>Selecione um profissional</option>
+            <option value="stefanne">Stefanne</option>
+            <option value="maria">Maria</option>
+            <option value="leticia">Leticia</option>
+            <option value="joana">Joana</option>
+            <option value="cleiton">Cleiton</option>
+            <option value="julia">Julia</option>
+        </select>
+
+        <div class="range-label">
+            <label for="tamanho-cabelo">Qual o comprimento do seu cabelo atualmente? (em cm)</label>
+            <output id="range-output">50</output> cm
+        </div>
+        <input type="range" id="tamanho-cabelo" name="tamanho-cabelo" min="0" max="100" step="1" value="50" oninput="updateRange(this.value)">
+        
+        <script>
+            function updateRange(value) {
+                document.getElementById('range-output').innerHTML = value;
+            }
+        </script>
+
+        <label for="profissional">Qual o comprimento do seu cabelo atualmente?</label>
+        <select id="profissional" name="profissional" required>
+            <option value="" disabled selected>Selecione o tamanho</option>
+            <option value="curto">Curto (até o ombro)</option>
+            <option value="medio">Médio (até o meio das costas)</option>
+            <option value="longo">Longo (abaixo das costas)</option>
+        </select>
+
+        <label>Quais serviços deseja realizar?</label>
+        <br>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="servicos" value="Corte"> Corte</label>
+            <label><input type="checkbox" name="servicos" value="Coloração"> Coloração</label>
+            <label><input type="checkbox" name="servicos" value="Manicure"> Manicure</label>
+            <label><input type="checkbox" name="servicos" value="Depilação"> Depilação</label>
+            <label><input type="checkbox" name="servicos" value="Limpeza de pele"> Limpeza de pele</label>
+            <label><input type="checkbox" name="servicos" value="Hidratação facial"> Hidratação facial</label>
+            <label><input type="checkbox" name="servicos" value="Esfoliação"> Esfoliação</label>
+            <label><input type="checkbox" name="servicos" value="Drenagem linfática"> Drenagem linfática</label>
+            <label><input type="checkbox" name="servicos" value="Maquiagem"> Maquiagem</label>
+            <label><input type="checkbox" name="servicos" value="Design de sobrancelhas"> Design de sobrancelhas</label>
+            <label><input type="checkbox" name="servicos" value="Massagem relaxante"> Massagem relaxante</label>
+            <label><input type="checkbox" name="servicos" value="Massagem terapêutica"> Massagem terapêutica</label>
+            <label><input type="checkbox" name="servicos" value="Penteado"> Penteado</label>
+            <label><input type="checkbox" name="servicos" value="Progressiva"> Progressiva</label>
+            <label><input type="checkbox" name="servicos" value="Escova"> Escova</label>
+            <label><input type="checkbox" name="servicos" value="Botox Capilar"> Botox Capilar</label>
+        </div>
+
+        <label for="frequencia">Frequência de visitas</label>
+        <select id="frequencia" name="frequencia" required>
+            <option value="primeira-vez">Primeira vez</option>
+            <option value="mensal">Mensal</option>
+            <option value="trimestral">Trimestral</option>
+            <option value="anual">Anual</option>
+        </select>
+
+        <label for="historico-servicos">Serviços já realizados no salão ou em outros locais</label>
+        <textarea id="historico-servicos" name="historico-servicos" rows="4"></textarea>
+
+        <h2>Preferências Pessoais</h2>
+
+        <label for="estilo">Estilo desejado</label>
+        <textarea id="estilo" name="estilo" rows="4" placeholder="Ex: cor de cabelo, tipo de corte, etc."></textarea>
+
+        <label for="produtos-preferidos">Produtos de beleza preferidos</label>
+        <textarea id="produtos-preferidos" name="produtos-preferidos" rows="4" placeholder="Informe os produtos que você mais gosta"></textarea>
+
+        <label for="preferencias-agendamento">Preferências de agendamento</label>
+        <textarea id="preferencias-agendamento" name="preferencias-agendamento" rows="4" placeholder="Dias e horários mais convenientes"></textarea>
+
+        <h2>Histórico de Saúde</h2>
+
+        <label for="alergias">Alergias a produtos ou ingredientes</label>
+        <textarea id="alergias" name="alergias" rows="4" placeholder="Ex: Amônia, látex, etc."></textarea>
+
+        <label for="condicoes-saude">Condições de saúde que possam afetar o tratamento</label>
+        <textarea id="condicoes-saude" name="condicoes-saude" rows="4" placeholder="Ex: Gravidez, dermatites, etc."></textarea>
+
+        <label for="tratamentos-recentes">Tratamentos médicos ou estéticos recentes</label>
+        <textarea id="tratamentos-recentes" name="tratamentos-recentes" rows="4" placeholder="Ex: Cirurgias, peeling, etc."></textarea>
+
+        <h2>Consentimento</h2>
+
+        <p>Autoriza o uso de fotos para redes sociais (antes e depois)?</p>
+        <input type="radio" id="foto-sim" name="foto-consentimento" value="Sim" required>
+        <label for="foto-sim">Sim</label>
+        <input type="radio" id="foto-nao" name="foto-consentimento" value="Não" required>
+        <label for="foto-nao">Não</label>
+
+        <p>Concorda com o uso de produtos químicos para os tratamentos?</p>
+        <input type="radio" id="quimicos-sim" name="quimicos-consentimento" value="Sim" required>
+        <label for="quimicos-sim">Sim</label>
+        <input type="radio" id="quimicos-nao" name="quimicos-consentimento" value="Não" required>
+        <label for="quimicos-nao">Não</label>
+
+        <p>Política de cancelamento e atraso:</p>
+        <input type="checkbox" id="cancelamento" name="cancelamento-consentimento" required>
+        <label for="cancelamento">Li e aceito a política de cancelamento e atraso do salão</label>
+
+        <div class="buttons">
+            <input type="reset" value="Limpar">
+            <input type="submit" value="Enviar">
+        </div>
+    </form>
+
+    <script>
+        function limpa_formulário_cep() {
+            document.getElementById('rua').value = "";
+            document.getElementById('bairro').value = "";
+            document.getElementById('cidade').value = "";
+            document.getElementById('uf').value = "";
+        }
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                document.getElementById('rua').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('uf').value = (conteudo.uf);
+            } else {
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+
+        function pesquisacep(valor) {
+            var cep = valor.replace(/\D/g, '');
+            if (cep != "") {
+                var validacep = /^[0-9]{8}$/;
+                if (validacep.test(cep)) {
+                    document.getElementById('cep').value = cep.substring(0, 5) + "-" + cep.substring(5);
+                    document.getElementById('rua').value = "...";
+                    document.getElementById('bairro').value = "...";
+                    document.getElementById('cidade').value = "...";
+                    document.getElementById('uf').value = "...";
+
+                    var script = document.createElement('script');
+                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+                    document.body.appendChild(script);
+                } else {
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } else {
+                limpa_formulário_cep();
+            }
+        }
+    </script>
+
+</body>
+</html>
